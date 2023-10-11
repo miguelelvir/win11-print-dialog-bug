@@ -24,14 +24,6 @@
 
         private void Print()
         {
-            var dialog = new PrintDialog { PageRangeSelection = PageRangeSelection.AllPages, UserPageRangeEnabled = false };
-            var allowPrint = dialog.ShowDialog().Value;
-
-            if (!allowPrint)
-            {
-                return;
-            }
-
             var printDoc = new PrintDocument { PrinterSettings = { PrinterName = this.PrintSettings.PrinterName } };
             if (!printDoc.PrinterSettings.IsValid)
             {
@@ -48,7 +40,16 @@
             };
 
             printDoc.PrintPage += (s, a) => this.PrintText(a, "Here is some text to print.");
-            printDoc.Print();
+
+            var dialog = new PrintDialog { PageRangeSelection = PageRangeSelection.AllPages, UserPageRangeEnabled = false };
+            var allowPrint = dialog.ShowDialog().Value;
+
+            if (allowPrint)
+            {
+                this.PrintSettings.PrinterName = dialog.PrintQueue.FullName;
+                printDoc.PrinterSettings.PrinterName = this.PrintSettings.PrinterName;
+                printDoc.Print();
+            }
         }
 
         private void PrintText(PrintPageEventArgs ev, string textToPrint)

@@ -1,77 +1,127 @@
 ﻿namespace Win11Print
 {
+    using System;
+    using System.ComponentModel;
     using System.Drawing.Printing;
+    using System.Runtime.CompilerServices;
 
-    public class ReportPrintSettings
+    public class ReportPrintSettings : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private string printerName;
         public string PrinterName
         {
             get => printerName;
-            set => printerName = value;
+            set
+            {
+                printerName = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private int leftMargin;
         public int LeftMargin
         {
             get => leftMargin;
-            set => leftMargin = value;
+            set
+            {
+                leftMargin = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private int rightMargin;
         public int RightMargin
         {
             get => rightMargin;
-            set => rightMargin = value;
+            set
+            {
+                rightMargin = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private int topMargin;
         public int TopMargin
         {
             get => topMargin;
-            set => topMargin = value;
+            set
+            {
+                topMargin = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private int bottomMargin;
         public int BottomMargin
         {
             get => bottomMargin;
-            set => bottomMargin = value;
+            set
+            {
+                bottomMargin = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private PaperSize paperSize;
         public PaperSize PaperSize
         {
             get => paperSize;
-            set => paperSize = value;
+            set
+            {
+                paperSize = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private string paperSourceName;
         public string PaperSourceName
         {
             get => paperSourceName;
-            set => paperSourceName = value;
+            set
+            {
+                paperSourceName = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private int paperSourceKind;
         public int PaperSourceKind
         {
             get => paperSourceKind;
-            set => paperSourceKind = value;
+            set
+            {
+                paperSourceKind = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private bool landscape;
         public bool Landscape
         {
             get => landscape;
-            set => landscape = value;
+            set
+            {
+                landscape = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private int? dpi;
         public int? Dpi
         {
             get => dpi;
-            set => dpi = value;
+            set
+            {
+                dpi = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
