@@ -3,6 +3,7 @@
     using System;
     using System.Drawing;
     using System.Drawing.Printing;
+    using System.Printing;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -42,6 +43,8 @@
             printDoc.PrintPage += (s, a) => this.PrintText(a, "Here is some text to print.");
 
             var dialog = new PrintDialog { PageRangeSelection = PageRangeSelection.AllPages, UserPageRangeEnabled = false };
+            dialog.PrintTicket.PageOrientation = this.PrintSettings.Landscape ? PageOrientation.Landscape : PageOrientation.Portrait;
+
             var allowPrint = dialog.ShowDialog().Value;
 
             if (allowPrint)
