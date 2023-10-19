@@ -41,18 +41,10 @@
 
         private void Print()
         {
-            // Create a LocalPrintServer instance, which represents 
-            // the print server for the local computer.
             var localPrintServer = new LocalPrintServer();
-
-            // Get the default print queue on the local computer.
             var printQueue = localPrintServer.DefaultPrintQueue;
-
-            // Get a default print ticket from printer.
             var printTicket = printQueue.DefaultPrintTicket;
             printTicket.PageOrientation = this.PrintSettings.Landscape ? PageOrientation.Landscape : PageOrientation.Portrait;
-
-            var xpsDocumentWriter = PrintQueue.CreateXpsDocumentWriter(printQueue);
 
             var dialog = new PrintDialog
             {
@@ -67,6 +59,7 @@
             if (allowPrint)
             {
                 this.PrintSettings.PrinterName = dialog.PrintQueue.FullName;
+                var xpsDocumentWriter = PrintQueue.CreateXpsDocumentWriter(printQueue);
                 xpsDocumentWriter.Write(CreateSomeContent(), dialog.PrintTicket);
             }
         }
