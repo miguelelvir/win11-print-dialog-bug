@@ -2,7 +2,7 @@
 {
     using System;
     using System.ComponentModel;
-    using System.Drawing.Printing;
+    using System.Printing;
     using System.Runtime.CompilerServices;
 
     public class ReportPrintSettings : INotifyPropertyChanged
@@ -64,8 +64,8 @@
             }
         }
 
-        private PaperSize paperSize;
-        public PaperSize PaperSize
+        private PageMediaSize paperSize;
+        public PageMediaSize PaperSize
         {
             get => paperSize;
             set
